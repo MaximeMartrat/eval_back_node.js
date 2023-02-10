@@ -1,0 +1,7 @@
+{
+  "entrees": [
+    { "id": 4, "name": "mousse de canard", "price": 10 },
+    { "id": 5, "name": "charcuterie", "price": 13 },
+    { "id": 7, "name": "paté", "price": 13 }
+  ]
+}
