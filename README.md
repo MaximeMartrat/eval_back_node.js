@@ -1,17 +1,40 @@
-*Installation de node.js => https://nodejs.org/en/
+Eval NodeJs
+=
 
-*Initialisation de npm dans le terminal => npm Init (remplir le champ "author")
+## Introduction
 
-*Installation des packages npm utiles au projet => -express (pour écrire des fonctions de traitement pour différentes requêtes HTTP par le biais des routes) => npm install express -nodemon (pour redémarrer le processus automatiquement)=> npm install nodemon --start-dev (l'option --start-dev sert à ne pas installer le package complet mais seulement les options nécessaires au développement du projet) -fs (pour créer et lire les fichiers)=> npm install fs
+Evaluation sur le CRUD sur un tableau fait en groupe qui se trouve dans le fichier exemple.json
+```
+src/model/exemple.json
+``` 
+Et sur 6 tableaux en individuel qui se trouvent dans le fichier film.json
 
-*Creation du fichier app.js pour lancer le serveur
+```
+./src/model/film.json
+```
 
-*Création de la base de données dans un fichier Json => menu.json
-
-*Lancement du serveur dans le terminal => npm start
-
-*Lancement de la requête avec l'extension de VsCode Thunder Client => New Request
-
-*Appel à la base de données crée en tapant l'adresse du serveur => http://localhost:4000/data
-
-*Installation du package body-parser => npm install body-parser
+Notre index se situe dans le fichier :
+```
+/app.js
+```
+L'écoute des ports pour l'appel au server est sur :
+```
+/server.js
+```
+Les modules contenants les methodes nécessaires à l'application :
+```
+./src/controller/exemple_controller
+```
+Les routes pour faire appel aux methodes :
+```
+./src/routes/exemple_route
+```
+## Liste des routes
+| Routes | Verbe | Exemple | Explication |
+| :------| :-----| :-------| -----------:|
+| /entrees | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher les données contenu dans le tableau d'un fichier |
+| /entrees/:id | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher une entrée d'un tableau récupérée par son id  contenu dans un fichier |
+| /entrees/title/:titre | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher les données d'une entrée récupérée grace à son titre dans le tableau d'un fichier |
+| /entrees | POST | http://localhost:3200/entrees | une route qui va permettre d'insérer des données dans le tableau d'un fichier |
+| /entrees | PUT | http://localhost:3200/entrees | une route qui va permettre de mettre à jour les données contenu dans le tableau d'un fichier en le ciblant par son id |
+| /entrees | DELETE | http://localhost:3200/entrees | une route qui va permettre d'effacer les données contenu dans le tableau d'un fichier récupérer par son id |
