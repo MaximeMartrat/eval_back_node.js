@@ -38,3 +38,16 @@ Les routes pour faire appel aux methodes :
 | /entrees | POST | http://localhost:3200/entrees | une route qui va permettre d'insérer des données dans le tableau d'un fichier |
 | /entrees/:id | PUT | http://localhost:3200/entrees/:id | une route qui va permettre de mettre à jour les données contenu dans le tableau d'un fichier en le ciblant par son id |
 | /entrees/:id| DELETE | http://localhost:3200/entrees/:id | une route qui va permettre d'effacer les données contenu dans le tableau d'un fichier récupérer par son id |
+
+##Alerte
+
+Une fois récupéré le dossier n'oubliez pas de faire la commande suivante dans le terminal : 
+```
+npm init
+```
+Pour installer les node_modules nécessaires à l'utilisation de l'application
+Puis taper dans le terminal la commande: 
+```
+npm start
+```
+Pour lancer le serveur
