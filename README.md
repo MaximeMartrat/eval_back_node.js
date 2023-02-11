@@ -33,8 +33,8 @@ Les routes pour faire appel aux methodes :
 | Routes | Verbe | Exemple | Explication |
 | :------| :-----| :-------| -----------:|
 | /entrees | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher les données contenu dans le tableau d'un fichier |
-| /entrees/:id | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher une entrée d'un tableau récupérée par son id  contenu dans un fichier |
-| /entrees/title/:titre | GET | http://localhost:3200/entrees | une route qui va permettre d'afficher les données d'une entrée récupérée grace à son titre dans le tableau d'un fichier |
+| /entrees/:id | GET | http://localhost:3200/entrees/:id | une route qui va permettre d'afficher une entrée d'un tableau récupérée par son id  contenu dans un fichier |
+| /entrees/title/:titre | GET | http://localhost:3200/entrees/title/:titre | une route qui va permettre d'afficher les données d'une entrée récupérée grace à son titre dans le tableau d'un fichier |
 | /entrees | POST | http://localhost:3200/entrees | une route qui va permettre d'insérer des données dans le tableau d'un fichier |
-| /entrees | PUT | http://localhost:3200/entrees | une route qui va permettre de mettre à jour les données contenu dans le tableau d'un fichier en le ciblant par son id |
-| /entrees | DELETE | http://localhost:3200/entrees | une route qui va permettre d'effacer les données contenu dans le tableau d'un fichier récupérer par son id |
+| /entrees/:id | PUT | http://localhost:3200/entrees/:id | une route qui va permettre de mettre à jour les données contenu dans le tableau d'un fichier en le ciblant par son id |
+| /entrees/:id| DELETE | http://localhost:3200/entrees/:id | une route qui va permettre d'effacer les données contenu dans le tableau d'un fichier récupérer par son id |
