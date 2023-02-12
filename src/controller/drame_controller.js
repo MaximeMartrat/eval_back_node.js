@@ -93,9 +93,9 @@ exports.getDataByTitle = (request, response)=> {
     })
 }
 
-//export de la methode createData permettant d'intégrer de nouvelles données dans le tableau drame de mes fichiers film.json
+//export de la methode createData permettant d'intégrer de nouvelles données dans le tableau drame de mon fichier "film.json"
 exports.createData = (request, response) =>{
-    //lecture du fichier film.json
+    //lecture du fichier "film.json"
     //fs.readFile (chemin, (err,data))
     fs.readFile("./src/model/film.json", (err, data)=>{
         //if err
@@ -111,14 +111,13 @@ exports.createData = (request, response) =>{
             //const data = JSON.parse
             const existingData = JSON.parse(data);
             //ajout de la donnée de la requête
-            //data.tableau.push(requete: id:taille du tableau+1)
             //si tableau vide
             if (existingData.drame === []) {
-                //tableau = requete id =1
+                //tableau = requete (id = 1)
                 existingData.drame.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
             //sinon
             } else {
-                //tableau = requete id = taille du tableau + 1
+                //tableau = requete (id = taille du tableau + 1)
                 existingData.drame.push({ "id": existingData.drame.length+1, "titre": request.body.titre, "année": request.body.année });
             }
             //écriture de la donnée en string dans le tableau
@@ -225,7 +224,7 @@ exports.deleteDataById = (request, response) =>{
             //stockage de la donnée dans une constante
             //const data = JSON.parse(data)
             const existingData = JSON.parse(data);
-            //recherche dans la donnée de l'id correspondante  la requête et stockage dans une const
+            //recherche dans la donnée de l'id correspondante à la requête et stockage dans une const
             //const databyid = data.tableau.find
             const dataById = existingData.drame.find((obj)=> obj.id === parseInt(request.params.id));
             //si data de la requete non trouvé

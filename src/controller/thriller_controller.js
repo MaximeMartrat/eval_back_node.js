@@ -22,9 +22,9 @@ exports.getAllDataTab = (request, response) =>{
 };
 
 
-//export de la methode getdDataById qui permet récupérer une donnée par son id
+//export de la methode getdDataById qui permet de récupérer une donnée par son id
 exports.getDataById = (request, response)=>{
-    //lecture des données de film.json
+    //lecture des données de "film.json"
     //fs.readFile(chemin, (err,data))
     fs.readFile("./src/model/film.json", (err, data)=>{
         //if erreur
@@ -59,7 +59,7 @@ exports.getDataById = (request, response)=>{
 };
 
 
-//export de la methode getdDataByTitle qui permet récupérer une donnée par son titre
+//export de la methode getdDataByTitle qui permet de récupérer une donnée par son titre
 exports.getDataByTitle = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -94,7 +94,7 @@ exports.getDataByTitle = (request, response)=>{
     });
 };
 
-//export de la methode createData qui permet d'insérer une donnée dans le tableau du fichier film.json
+//export de la methode createData qui permet d'insérer une donnée dans un tableau du fichier "film.json"
 exports.createData = (request, response) =>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -115,11 +115,11 @@ exports.createData = (request, response) =>{
             //données existante = donnée de la requete
             //si tableau vide
             if (existingData.thriller === []) {
-                //tableau = requete id =1
+                //tableau = requete (id =1=)
                 existingData.thriller.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
             //sinon
             } else {
-                //tableau = requete id = taille du tableau + 1
+                //tableau = requete + (id = taille du tableau + 1)
                 existingData.thriller.push({ "id": existingData.thriller.length+1, "titre": request.body.titre, "année": request.body.année });
             }
             //on réécrit les nouvelles données
@@ -174,7 +174,7 @@ exports.updateData = (request, response) =>{
             //sinon
             } else {
                 //on remplace les données par celles de la requête
-                //données existante = donnée de la requete
+                //données existantes = donnée de la requete
                 //data.donnée = requete.nouvelle donnée
                 //si il y a requete pour changer le titre et l'année
                 if(request.body.titre && request.body.année){
@@ -214,7 +214,7 @@ exports.updateData = (request, response) =>{
 
 //export de la methode deleteDataById qui permet de supprimer une donnée récupérée par son id
 exports.deleteDataById = (request, response)=>{
-    //lecture des données de film.json
+    //lecture des données de "film.json"
     //fs.readFile(chemin, (err,data))
     fs.readFile("./src/model/film.json", (err, data)=>{
         //if erreur

@@ -53,7 +53,7 @@ exports.getDataById = (request, response) =>{
     });
 };
 
-//export de la methode getdDataByTitle qui permet récupérer une donnée par son titre
+//export de la methode getdDataByTitle qui permet de récupérer une donnée par son titre
 exports.getDataByTitle = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -73,7 +73,7 @@ exports.getDataByTitle = (request, response)=>{
             //recherche dans la donnée du titre correspondant à la requête et stockage dans une const
             //const databytitle = data.tableau.find
             const dataByTitle = existingData.western.find((obj)=> obj.titre === request.params.titre);
-            //si data de la requete trouvé
+            //si data de la requête trouvée
             if (dataByTitle) {
                 //status 200 + donnée
                 response.status(200).json(dataByTitle);
@@ -89,7 +89,7 @@ exports.getDataByTitle = (request, response)=>{
 };
             
 
-//export de la methode createData permettant d'insérer de la donnée dans mes fichiers film.json
+//export de la methode createData permettant d'insérer de la donnée dans un tableau de mon fichier "film.json"
 exports.createData = (request, response) =>{
     //lecture du fichier avec la methode readfile du module fs
     fs.readFile("./src/model/film.json", (err, data)=>{
@@ -136,7 +136,7 @@ exports.createData = (request, response) =>{
 
 //Export de la methode updateData qui permet de mettre à jour une donnée en se basant sur son id
 exports.updateData = (request, response) => {
-    //lecture du fichier avec la methode readFile du mdule fs
+    //lecture du fichier avec la methode readFile du module fs
     fs.readFile("./src/model/film.json", (err, data)=>{
         //condition si erreur lors de la lecture
         //if error
@@ -165,16 +165,16 @@ exports.updateData = (request, response) => {
             } else {
                 //remplacement des données par celle de la requête
                 //databyid.(données demandées) = requete.(données changées)
-                //si il y a requete pour changer le titre et l'année
+                //si il y a une requete pour changer le titre et l'année
                 if(request.body.titre && request.body.année){
                     //titre + année = requête
                     dataById.titre = request.body.titre;
                     dataById.année = request.body.année;
-                //sinon si requête pour changer titre
+                //sinon si une requête pour changer juste le titre
                 } else if (request.body.titre){
                     //titre = requête
                     dataById.titre = request.body.titre;
-                //sinon si requête pour changer année
+                //sinon si une requête pour changer juste l'année
                 } else if (request.body.année){
                     //année = requête
                     dataById.année = request.body.année;
@@ -219,12 +219,12 @@ exports.deleteDataById = (request, response) => {
             //stockage dans une constante des données
             //const data = JSON.parse
             const existingData = JSON.parse(data);
-            //recherche dans le fichier l'id correspondante aux paramètres demandés
+            //recherche dans le fichier de l'id correspondante aux paramètres demandés
             //const databyid = data.find
             const dataById = existingData.western.find((obj)=> obj.id === parseInt(request.params.id));
             //if objet non trouvé
             if (!dataById) {
-                //erreur404 +message
+                //erreur 404 + message
                 response.status(404).json({
                     message: "Aucun objet avce cet id trouvé",
                     error:err

@@ -52,7 +52,7 @@ exports.getDataById = (request, response) =>{
     })
 }
 
-//export de la methode getdDataByTitle qui permet récupérer une donnée par son titre
+//export de la methode getdDataByTitle qui permet de récupérer une donnée par son titre
 exports.getDataByTitle = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -87,7 +87,7 @@ exports.getDataByTitle = (request, response)=>{
     });
 };
 
-//export de la methode createData permettant d'insérer de la donnée dans mes fichier film.json
+//export de la methode createData permettant d'insérer de la donnée dans mon fichier film.json
 exports.createData = (request, response) =>{
     //lecture du fichier avec readfile
     fs.readFile("./src/model/film.json", (err, data)=>{
@@ -104,7 +104,7 @@ exports.createData = (request, response) =>{
             const existingData = JSON.parse(data);
             //si tableau vide
             if (existingData.action === []) {
-                //tableau = requete id =1
+                //tableau = requete id = 1
                 existingData.action.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
             //sinon
             } else {
@@ -147,7 +147,7 @@ exports.updateData = (request, response) => {
         } else {
             //on stocke les données existante dans une constante avec la methode JSON.parse
             const existingData = JSON.parse(data);
-            //je cherche dans le fichier si l'id correspondant aux paramètres demandés est dans le contenu
+            //je cherche dans le fichier si l'id correspondante à la requête est dans le contenu
             const dataById = existingData.action.find((obj) => obj.id === parseInt(request.params.id));
             //si on ne trouve pas d'objet avec cet id
             if (!dataById) {
@@ -158,17 +158,17 @@ exports.updateData = (request, response) => {
                 })
             //sinon
             } else {
-                //on remplace les données par celle de la requête
+                //on remplace les données par celles de la requête
                 //si il y a requete pour changer le titre et l'année
                 if(request.body.titre && request.body.année){
                     //titre + année = requête
                     dataById.titre = request.body.titre;
                     dataById.année = request.body.année;
-                //sinon si requête pour changer titre
+                //sinon si requête pour changer seulement le titre
                 } else if (request.body.titre){
                     //titre = requête
                     dataById.titre = request.body.titre;
-                //sinon si requête pour changer année
+                //sinon si requête pour changer seulement l'année
                 } else if (request.body.année){
                     //année = requête
                     dataById.année = request.body.année;
@@ -209,7 +209,7 @@ exports.deleteDataById = (request, response) => {
         } else {
             //stockage de la donnée existante dans une constante
             const existingData = JSON.parse(data);
-            //recherche du fichier à l'id correspondante en paramètres dans le contenu
+            //recherche des données à l'id de la requête dans le contenu
             const dataById = existingData.action.find((obj)=> obj.id === parseInt(request.params.id));
             //si on ne trouve pas l'objet avec cette id
             if (!dataById) {
@@ -220,7 +220,7 @@ exports.deleteDataById = (request, response) => {
                 })
             //sinon
             } else {
-                //on réassigne la donnée existante par celle sans la donnée demandée avec la methode filter
+                //on réassigne la donnée existante sans la donnée éffacée avec la methode filter
                 existingData.action = existingData.action.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données avec writeFile
                 fs.writeFile("./src/model/film.json", JSON.stringify(existingData),(writeErr) => {

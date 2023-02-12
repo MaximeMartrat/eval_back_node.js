@@ -117,11 +117,11 @@ exports.createData = (request, response) =>{
             //data.tableau.push(requete)
             //si tableau vide
             if (existingData.comedie === []) {
-                //tableau = requete id =1
+                //tableau = requete  + (id = 1)
                 existingData.comedie.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
             //sinon
             } else {
-                //tableau = requete id = taille du tableau + 1
+                //tableau = requete + (id = taille du tableau + 1)
                 existingData.comedie.push({ "id": existingData.comedie.length+1, "titre": request.body.titre, "année": request.body.année });
             }
             //on réécrit les nouvelles données
@@ -183,11 +183,11 @@ exports.updateData = (request, response) =>{
                     //titre + année = requête
                     dataById.titre = request.body.titre;
                     dataById.année = request.body.année;
-                //sinon si requête pour changer titre
+                //sinon si requête pour changer le titre
                 } else if (request.body.titre){
                     //titre = requête
                     dataById.titre = request.body.titre;
-                //sinon si requête pour changer année
+                //sinon si requête pour changer l'année
                 } else if (request.body.année){
                     //année = requête
                     dataById.année = request.body.année;
@@ -234,7 +234,7 @@ exports.deleteDataById = (request, response)=>{
             //recherche dans la donnée de l'id correspondante à la requête et stockage dans une const
             //const databyid = data.tableau.find
             const dataById = existingData.comedie.find((obj)=> obj.id === parseInt(request.params.id));
-            //si data de la requete non trouvé
+            //si data de la requete non trouvée
             if (!dataById){
                 //status 404 + message
                 response.status(404).json({
@@ -243,7 +243,7 @@ exports.deleteDataById = (request, response)=>{
                 })
             //sinon
             } else {
-                //données existante = donnée de la requete
+                //données existante = données de la requete
                 //data.tableau = data.tableau.filter
                 existingData.comedie = existingData.comedie.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données
