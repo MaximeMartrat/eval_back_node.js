@@ -22,7 +22,7 @@ exports.getAllDataTab = (request, response) =>{
 };
 
 
-//export de la methode getdDataById qui permet récupérer une donnée par son id
+//export de la methode getdDataById qui permet de récupérer une donnée par son id
 exports.getDataById = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -59,7 +59,7 @@ exports.getDataById = (request, response)=>{
 };
 
 
-//export de la methode getdDataByTitle qui permet récupérer une donnée par son titre
+//export de la methode getdDataByTitle qui permet de récupérer une donnée par son titre
 exports.getDataByTitle = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
@@ -79,7 +79,7 @@ exports.getDataByTitle = (request, response)=>{
             //recherche dans la donnée du titre correspondant à la requête et stockage dans une const
             //const databytitle = data.tableau.find
             const dataByTitle = existingData.comedie.find((obj)=> obj.titre === request.params.titre);
-            //si data de la requete trouvé
+            //si data de la requete trouvée
             if (dataByTitle) {
                 //status 200 + donnée
                 response.status(200).json(dataByTitle);
@@ -113,9 +113,17 @@ exports.createData = (request, response) =>{
             const existingData = JSON.parse(data);
             //recuperation de l'id du dernier objet du tableau
             //ajout de la donnée
-            //données existante = donnée de la requete
+            //données existante + requete
             //data.tableau.push(requete)
-            existingData.comedie.push({ "id": existingData.comedie.length+1, "titre": request.body.titre, "année": request.body.année });
+            //si tableau vide
+            if (existingData.comedie === []) {
+                //tableau = requete id =1
+                existingData.comedie.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+            //sinon
+            } else {
+                //tableau = requete id = taille du tableau + 1
+                existingData.comedie.push({ "id": existingData.comedie.length+1, "titre": request.body.titre, "année": request.body.année });
+            }
             //on réécrit les nouvelles données
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))
             fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
@@ -170,7 +178,20 @@ exports.updateData = (request, response) =>{
                 //on remplace les données par celles de la requête
                 //données existante = donnée de la requete
                 //data.donnée = requete.nouvelle donnée
-                dataById.titre = request.body.titre
+                //si il y a requete pour changer le titre et l'année
+                if(request.body.titre && request.body.année){
+                    //titre + année = requête
+                    dataById.titre = request.body.titre;
+                    dataById.année = request.body.année;
+                //sinon si requête pour changer titre
+                } else if (request.body.titre){
+                    //titre = requête
+                    dataById.titre = request.body.titre;
+                //sinon si requête pour changer année
+                } else if (request.body.année){
+                    //année = requête
+                    dataById.année = request.body.année;
+                }
                 //on réécrit les nouvelles données
                 //fs.writeFile(chemin, JSON.stringify(donnée), (err))
                 fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{

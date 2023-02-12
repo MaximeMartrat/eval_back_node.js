@@ -66,7 +66,15 @@ exports.createData = (request, response) => {
             //transforme la data en json.manipulable
             const existingData = JSON.parse(data);
             //on rajoute la nouvelle donnée
-            existingData.entrees.push(request.body);
+            //si tableau vide
+            if (existingData.exemple === []) {
+                //tableau = requete id =1
+                existingData.exemple.push({ "id": 1, "name": request.body.name, "price": request.body.price });
+            //sinon
+            } else {
+                //tableau = requete id = taille du tableau + 1
+                existingData.exemple.push({ "id": existingData.exemple.length+1, "name": request.body.name, "année": request.body.price });
+            }
             //réecrit le fichier
             fs.writeFile("./src/model/exemple.json", JSON.stringify(existingData), (writeErr)=>{
                 //si erreur 500

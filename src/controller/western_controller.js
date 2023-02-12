@@ -104,8 +104,15 @@ exports.createData = (request, response) =>{
         } else {
             //on ajoute dans une constante les données transformées en json manipulable avec JSON.parse
             const existingData = JSON.parse(data);
-            //data.tableau.push(requete: id:taille du tableau+1)
-            existingData.western.push({ "id": existingData.western.length+1, "titre": request.body.titre, "année": request.body.année });
+            //si tableau vide
+            if (existingData.western === []) {
+                //tableau = requete id =1
+                existingData.western.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+            //sinon
+            } else {
+                //tableau = requete id = taille du tableau + 1
+                existingData.western.push({ "id": existingData.western.length+1, "titre": request.body.titre, "année": request.body.année });
+            }
             //réécrit dans le fichier (ds.writeFile)
             fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
                 // condition si erreur
@@ -158,7 +165,20 @@ exports.updateData = (request, response) => {
             } else {
                 //remplacement des données par celle de la requête
                 //databyid.(données demandées) = requete.(données changées)
-                dataById.titre = request.body.titre;
+                //si il y a requete pour changer le titre et l'année
+                if(request.body.titre && request.body.année){
+                    //titre + année = requête
+                    dataById.titre = request.body.titre;
+                    dataById.année = request.body.année;
+                //sinon si requête pour changer titre
+                } else if (request.body.titre){
+                    //titre = requête
+                    dataById.titre = request.body.titre;
+                //sinon si requête pour changer année
+                } else if (request.body.année){
+                    //année = requête
+                    dataById.année = request.body.année;
+                }
                 //réécriture des nouvelles données
                 //fs.writeFile(chemin, JSON.stringify(donnée)(erreur))
                 fs.writeFile("./src/model/film.json", JSON.stringify(existingData),(writeErr)=>{

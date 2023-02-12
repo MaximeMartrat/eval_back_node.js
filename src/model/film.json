@@ -10,7 +10,7 @@
     { "id": 3, "titre": "Butch Cassidy et le kid", "année": "1969" }
   ],
   "drame": [
-    { "id": 1, "titre": "La ligne verte", "année": "1999" },
+    { "id": 1, "titre": "la ligne verte", "année": "1999" },
     { "id": 2, "titre": "La liste de Schindler", "année": "1993" },
     { "id": 3, "titre": "Les évadés", "année": "1994" }
   ],

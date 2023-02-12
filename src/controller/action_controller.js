@@ -102,8 +102,15 @@ exports.createData = (request, response) =>{
         } else {
             //on ajoute dans une constante la data transformée en json manipulable avec JSON.parse
             const existingData = JSON.parse(data);
-            //data.tableau.push(requete: id:taille du tableau+1)
-            existingData.action.push({ "id": existingData.action.length+1, "titre": request.body.titre, "année": request.body.année });
+            //si tableau vide
+            if (existingData.action === []) {
+                //tableau = requete id =1
+                existingData.action.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+            //sinon
+            } else {
+                //tableau = requete id = taille du tableau + 1
+                existingData.action.push({ "id": existingData.action.length+1, "titre": request.body.titre, "année": request.body.année });
+            }
             //réecrit dans le fichier
             fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
                 //si y a une erreur d'écriture
@@ -125,7 +132,7 @@ exports.createData = (request, response) =>{
     })
 };
 
-//export la methode updateData qui permet de mettre à jour une donnée en se basant sur son id
+//export de la methode updateData qui permet de mettre à jour une donnée en se basant sur son id
 exports.updateData = (request, response) => {
     //lecture du fichier avec readFile
     fs.readFile("./src/model/film.json", (err, data)=>{
@@ -140,7 +147,7 @@ exports.updateData = (request, response) => {
         } else {
             //on stocke les données existante dans une constante avec la methode JSON.parse
             const existingData = JSON.parse(data);
-            //je cherche dans le fichier si l'id correspondant aux paramètres est dans le contenu
+            //je cherche dans le fichier si l'id correspondant aux paramètres demandés est dans le contenu
             const dataById = existingData.action.find((obj) => obj.id === parseInt(request.params.id));
             //si on ne trouve pas d'objet avec cet id
             if (!dataById) {
@@ -152,7 +159,20 @@ exports.updateData = (request, response) => {
             //sinon
             } else {
                 //on remplace les données par celle de la requête
-                dataById.titre = request.body.titre;
+                //si il y a requete pour changer le titre et l'année
+                if(request.body.titre && request.body.année){
+                    //titre + année = requête
+                    dataById.titre = request.body.titre;
+                    dataById.année = request.body.année;
+                //sinon si requête pour changer titre
+                } else if (request.body.titre){
+                    //titre = requête
+                    dataById.titre = request.body.titre;
+                //sinon si requête pour changer année
+                } else if (request.body.année){
+                    //année = requête
+                    dataById.année = request.body.année;
+                }
                 //on réecrit les nouvelles données avec writeFile
                 fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
                     //si il y a une erreur
