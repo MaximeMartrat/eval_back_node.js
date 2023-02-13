@@ -1,32 +1,32 @@
 {
   "action": [
-    { "id": 1, "titre": "Pulp Fiction", "année": "1994" },
-    { "id": 2, "titre": "Fight Club", "année": "1999" },
-    { "id": 3, "titre": "True Romance", "année": "1993" }
+    { "id": 1, "titre": "Pulp Fiction", "annee": "1994" },
+    { "id": 2, "titre": "Fight Club", "annee": "1999" },
+    { "id": 3, "titre": "True Romance", "annee": "1993" }
   ],
   "western": [
-    { "id": 1, "titre": "Il était une fois dans l'ouest", "année": "1969" },
-    { "id": 2, "titre": "Le bon, la brute et le truand", "année": "1966" },
-    { "id": 3, "titre": "Butch Cassidy et le kid", "année": "1969" }
+    { "id": 1, "titre": "Il était une fois dans l'ouest", "annee": "1969" },
+    { "id": 2, "titre": "Le bon, la brute et le truand", "annee": "1966" },
+    { "id": 3, "titre": "Butch Cassidy et le kid", "annee": "1969" }
   ],
   "drame": [
-    { "id": 1, "titre": "la ligne verte", "année": "1999" },
-    { "id": 2, "titre": "La liste de Schindler", "année": "1993" },
-    { "id": 3, "titre": "Les évadés", "année": "1994" }
+    { "id": 1, "titre": "la ligne verte", "annee": "1999" },
+    { "id": 2, "titre": "La liste de Schindler", "annee": "1993" },
+    { "id": 3, "titre": "Les évadés", "annee": "1994" }
   ],
   "comedie": [
-    { "id": 1, "titre": "La cité de la peur", "année": "1994" },
-    { "id": 2, "titre": "Sacré Graal", "année": "1975" },
-    { "id": 3, "titre": "C'est arrivé près de chez vous", "année": "1992" }
+    { "id": 1, "titre": "La cité de la peur", "annee": "1994" },
+    { "id": 2, "titre": "Sacré Graal", "annee": "1975" },
+    { "id": 3, "titre": "C'est arrivé près de chez vous", "annee": "1992" }
   ],
   "scienceF": [
-    { "id": 1, "titre": "Blade Runner", "année": "1982" },
-    { "id": 2, "titre": "Alien, le huitième passager", "année": "1979" },
-    { "id": 3, "titre": "Retour vers le futur", "année": "1985" }
+    { "id": 1, "titre": "Blade Runner", "annee": "1982" },
+    { "id": 2, "titre": "Alien, le huitième passager", "annee": "1979" },
+    { "id": 3, "titre": "Retour vers le futur", "annee": "1985" }
   ],
   "thriller": [
-    { "id": 1, "titre": "Seven", "année": "1995" },
-    { "id": 2, "titre": "Le silence des agneaux", "année": "1991" },
-    { "id": 3, "titre": "L.A Confidential", "année": "1997" }
+    { "id": 1, "titre": "Seven", "annee": "1995" },
+    { "id": 2, "titre": "Le silence des agneaux", "annee": "1991" },
+    { "id": 3, "titre": "L.A Confidential", "annee": "1997" }
   ]
 }

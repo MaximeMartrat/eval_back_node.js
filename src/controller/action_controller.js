@@ -1,12 +1,13 @@
 //declaration de la constante pour l'export du module fs
 const fs = require('fs');
+const myData = "./src/model/film.json";
 
 //export de la methode getAllDataTab permettant d'afficher les données contenus dans le tableau action du fichier film.json en JSON dans la requête
 exports.getAllDataTab = (request, response) => {
     //on utilise la methode readFile du module fs pour lire le fichier
-    fs.readFile("./src/model/film.json", (err, data) =>{
+    fs.readFile(myData, (err, data) =>{
         //condition si erreur
-        if(err){
+        if(err) {
             //renvoi de l'erreur status 500 et du message
             response.status(500).json({
                 message: 'Erreur de lecture !!',
@@ -23,10 +24,10 @@ exports.getAllDataTab = (request, response) => {
 //export de la methode getDataById permettant de récupérer une data par son id
 exports.getDataById = (request, response) =>{
     //lecture du fichier film.json
-    fs.readFile("./src/model/film.json", (err, data) =>{
+    fs.readFile(myData, (err, data) => {
         //condition si un erreur 500
         //on renvoi l'erreur d'écriture avec son message
-        if (err) {
+        if(err) {
             response.status(500).json({
                 message: "Erreur lors de l'ecriture",
                 Error: err
@@ -38,7 +39,7 @@ exports.getDataById = (request, response) =>{
             //je vais chercher dans ce fichier si l'id passée en paramètres existe dans le contenu
             const dataById = manipData.action.find((obj) => obj.id === parseInt(request.params.id))
             //condition si on trouve cet id
-            if (dataById) {
+            if(dataById) {
                 //renvoi de la réponse avec le status 200 et l'objet
                 response.status(200).json(dataById)
             //sinon
@@ -56,9 +57,9 @@ exports.getDataById = (request, response) =>{
 exports.getDataByTitle = (request, response)=>{
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
-    fs.readFile("./src/model/film.json", (err, data)=>{
+    fs.readFile(myData, (err, data)=>{
         //if erreur
-        if (err){
+        if(err) {
             //status 500 + message
             response.status(500).json({
                 message: "Erreur de lecture",
@@ -71,9 +72,9 @@ exports.getDataByTitle = (request, response)=>{
             const existingData = JSON.parse(data);
             //recherche dans la donnée du titre correspondant à la requête et stockage dans une const
             //const databytitle = data.tableau.find
-            const dataByTitle = existingData.action.find((obj)=> obj.titre === request.params.titre);
+            const dataByTitle = existingData.action.find((obj)=> obj.titre.toLowerCase() === request.params.titre.toLowerCase());
             //si data de la requete trouvé
-            if (dataByTitle) {
+            if(dataByTitle) {
                 //status 200 + donnée
                 response.status(200).json(dataByTitle);
             //sinon
@@ -90,7 +91,7 @@ exports.getDataByTitle = (request, response)=>{
 //export de la methode createData permettant d'insérer de la donnée dans mon fichier film.json
 exports.createData = (request, response) =>{
     //lecture du fichier avec readfile
-    fs.readFile("./src/model/film.json", (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //condition
         if(err) {
             //si erreur 500 + message
@@ -103,18 +104,19 @@ exports.createData = (request, response) =>{
             //on ajoute dans une constante la data transformée en json manipulable avec JSON.parse
             const existingData = JSON.parse(data);
             //si tableau vide
-            if (existingData.action === []) {
+            if(existingData.action.length === 0) {
                 //tableau = requete id = 1
                 existingData.action.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
-            //sinon
+                //sinon
             } else {
+                let thisData = existingData.action[existingData.action.length-1]
                 //tableau = requete id = taille du tableau + 1
-                existingData.action.push({ "id": existingData.action.length+1, "titre": request.body.titre, "année": request.body.année });
+                existingData.action.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
             }
             //réecrit dans le fichier
-            fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
+            fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
                 //si y a une erreur d'écriture
-                if(writeErr){
+                if(writeErr) {
                     //envoi de l'erreur status 500 + message
                     response.status(500).json({
                         message: "Erreur lors de l'écriture",
@@ -135,9 +137,9 @@ exports.createData = (request, response) =>{
 //export de la methode updateData qui permet de mettre à jour une donnée en se basant sur son id
 exports.updateData = (request, response) => {
     //lecture du fichier avec readFile
-    fs.readFile("./src/model/film.json", (err, data)=>{
+    fs.readFile(myData, (err, data)=>{
         //condition si il y a une erreur lors de la lecture
-        if (err) {
+        if(err) {
             //on renvoi l'erreur 500 avec le message
             response.status(500).json({
                 message: "Erreur lors de la lecture",
@@ -150,7 +152,7 @@ exports.updateData = (request, response) => {
             //je cherche dans le fichier si l'id correspondante à la requête est dans le contenu
             const dataById = existingData.action.find((obj) => obj.id === parseInt(request.params.id));
             //si on ne trouve pas d'objet avec cet id
-            if (!dataById) {
+            if(!dataById) {
                 //on renvoi une réponse (404) avec le message
                 response.status(404).json({
                     message: "objet non trouvé",
@@ -159,24 +161,11 @@ exports.updateData = (request, response) => {
             //sinon
             } else {
                 //on remplace les données par celles de la requête
-                //si il y a requete pour changer le titre et l'année
-                if(request.body.titre && request.body.année){
-                    //titre + année = requête
-                    dataById.titre = request.body.titre;
-                    dataById.année = request.body.année;
-                //sinon si requête pour changer seulement le titre
-                } else if (request.body.titre){
-                    //titre = requête
-                    dataById.titre = request.body.titre;
-                //sinon si requête pour changer seulement l'année
-                } else if (request.body.année){
-                    //année = requête
-                    dataById.année = request.body.année;
-                }
+                Object.assign(dataById, request.body);
                 //on réecrit les nouvelles données avec writeFile
-                fs.writeFile("./src/model/film.json", JSON.stringify(existingData), (writeErr)=>{
+                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
                     //si il y a une erreur
-                    if (writeErr) {
+                    if(writeErr) {
                         //on renvoi l'erreur 500 + message erreur d'ecriture
                         response.status(500).json({
                             message: "Erreur de la réécriture"
@@ -197,9 +186,9 @@ exports.updateData = (request, response) => {
 //export de la methode deleteDataById qui permet de supprimer une donnée en se basant sur son id
 exports.deleteDataById = (request, response) => {
     //lecture du fichier avec la methode readfile du module fs
-    fs.readFile("./src/model/film.json", (err, data) => {
+    fs.readFile(myData, (err, data) => {
         //si erreur de lecture
-        if (err) {
+        if(err) {
             //renvoi de l'erreur status 500 + message
             response.status(500).json({
                 message: "Erreur lors de l'ecriture",
@@ -212,7 +201,7 @@ exports.deleteDataById = (request, response) => {
             //recherche des données à l'id de la requête dans le contenu
             const dataById = existingData.action.find((obj)=> obj.id === parseInt(request.params.id));
             //si on ne trouve pas l'objet avec cette id
-            if (!dataById) {
+            if(!dataById) {
                 //renvoi de l'erreur 404 + message pas d'objet
                 response.status(404).json({
                     message: "l'objet avec cet id est introuvable",
@@ -223,9 +212,9 @@ exports.deleteDataById = (request, response) => {
                 //on réassigne la donnée existante sans la donnée éffacée avec la methode filter
                 existingData.action = existingData.action.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données avec writeFile
-                fs.writeFile("./src/model/film.json", JSON.stringify(existingData),(writeErr) => {
+                fs.writeFile(myData, JSON.stringify(existingData),(writeErr) => {
                     //si erreur de réécriture
-                    if(writeErr){
+                    if(writeErr) {
                         //renvoi de l'erreur 500 avec le message
                         response.status(500).json({
                             message: "Erreur lors de la réécriture",
