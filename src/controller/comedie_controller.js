@@ -23,7 +23,7 @@ exports.getAllDataTab = (request, response) => {
 
 
 //export de la methode getdDataById qui permet de récupérer une donnée par son id
-exports.getDataById = (request, response)=>{
+exports.getDataById = (request, response)=> {
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
     fs.readFile(myData, (err, data)=> {
@@ -65,7 +65,7 @@ exports.getDataByTitle = (request, response)=>{
     //fs.readFile(chemin, (err,data))
     fs.readFile(myData, (err, data)=> {
         //if erreur
-        if (err){
+        if(err) {
             //status 500 + message
             response.status(500).json({
                 message: "Erreur de lecture",
@@ -95,10 +95,10 @@ exports.getDataByTitle = (request, response)=>{
 };
 
 //export de la methode createData qui permet d'insérer une donnée dans le tableau du fichier film.json
-exports.createData = (request, response) =>{
+exports.createData = (request, response) => {
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
-    fs.readFile(myData, (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //if erreur
         if(err) {
             //status 500 + message
@@ -121,12 +121,12 @@ exports.createData = (request, response) =>{
                 existingData.comedie.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
             //sinon
             } else {
-                let thisData = existingData.comedie[existingData.comedie.length - 1]
+                let thisData = existingData.comedie[ existingData.comedie.length - 1 ];
                 existingData.comedie.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
             }
             //on réécrit les nouvelles données
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))
-            fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
+            fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=> {
                 //if err
                 if(writeErr) {
                     //status 500 + message
@@ -147,7 +147,7 @@ exports.createData = (request, response) =>{
 };
                 
 //export de la methode updateData qui permet de mettre à jour une donnée récupérée par son id
-exports.updateData = (request, response) =>{
+exports.updateData = (request, response) => {
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
     fs.readFile(myData, (err,data)=> {
@@ -180,7 +180,7 @@ exports.updateData = (request, response) =>{
                 Object.assign(dataById, request.body);
                 //on réécrit les nouvelles données
                 //fs.writeFile(chemin, JSON.stringify(donnée), (err))
-                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
+                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=> {
                     //if err
                     if(err) {
                         //status 500 + message
@@ -204,7 +204,7 @@ exports.updateData = (request, response) =>{
 exports.deleteDataById = (request, response)=> {
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
-    fs.readFile(myData, (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //if erreur
         if(err) {
             //status 500 + message
@@ -234,7 +234,7 @@ exports.deleteDataById = (request, response)=> {
                 existingData.comedie = existingData.comedie.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données
                 //fs.writeFile(chemin, JSON.stringify(donnée), (err))
-                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
+                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=> {
                     //if err
                     if(err) {
                         //status 500 + message

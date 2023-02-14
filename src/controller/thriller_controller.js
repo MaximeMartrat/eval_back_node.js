@@ -95,10 +95,10 @@ exports.getDataByTitle = (request, response)=> {
 };
 
 //export de la methode createData qui permet d'insérer une donnée dans un tableau du fichier "film.json"
-exports.createData = (request, response) =>{
+exports.createData = (request, response) => {
     //lecture des données de film.json
     //fs.readFile(chemin, (err,data))
-    fs.readFile(myData, (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //if erreur
         if(err) {
             //status 500 + message
@@ -125,7 +125,7 @@ exports.createData = (request, response) =>{
             }
             //on réécrit les nouvelles données
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))
-            fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
+            fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=> {
                 //if err
                 if(writeErr) {
                     //status 500 + message
@@ -199,10 +199,10 @@ exports.updateData = (request, response) => {
 };
 
 //export de la methode deleteDataById qui permet de supprimer une donnée récupérée par son id
-exports.deleteDataById = (request, response)=>{
+exports.deleteDataById = (request, response)=> {
     //lecture des données de "film.json"
     //fs.readFile(chemin, (err,data))
-    fs.readFile(myData, (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //if erreur
         if(err) {
             //status 500 + message

@@ -5,7 +5,7 @@ const myData = "./src/model/film.json";
 //export de la methode getAllDataTab permettant d'afficher les données contenus dans le tableau action du fichier film.json en JSON dans la requête
 exports.getAllDataTab = (request, response) => {
     //on utilise la methode readFile du module fs pour lire le fichier
-    fs.readFile(myData, (err, data) =>{
+    fs.readFile(myData, (err, data) => {
         //condition si erreur
         if(err) {
             //renvoi de l'erreur status 500 et du message
@@ -22,7 +22,7 @@ exports.getAllDataTab = (request, response) => {
 }
 
 //export de la methode getDataById permettant de récupérer une data par son id
-exports.getDataById = (request, response) =>{
+exports.getDataById = (request, response) => {
     //lecture du fichier film.json
     fs.readFile(myData, (err, data) => {
         //condition si un erreur 500
@@ -35,7 +35,7 @@ exports.getDataById = (request, response) =>{
         //sinon
         } else {
             //on transforme les datas en json manipulable
-            const manipData = JSON.parse(data)
+            const manipData = JSON.parse(data);
             //je vais chercher dans ce fichier si l'id passée en paramètres existe dans le contenu
             const dataById = manipData.action.find((obj) => obj.id === parseInt(request.params.id))
             //condition si on trouve cet id
@@ -89,7 +89,7 @@ exports.getDataByTitle = (request, response)=>{
 };
 
 //export de la methode createData permettant d'insérer de la donnée dans mon fichier film.json
-exports.createData = (request, response) =>{
+exports.createData = (request, response) => {
     //lecture du fichier avec readfile
     fs.readFile(myData, (err, data)=> {
         //condition
@@ -109,7 +109,7 @@ exports.createData = (request, response) =>{
                 existingData.action.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
                 //sinon
             } else {
-                let thisData = existingData.action[existingData.action.length-1]
+                let thisData = existingData.action[ existingData.action.length-1 ];
                 //tableau = requete id = taille du tableau + 1
                 existingData.action.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
             }
@@ -137,7 +137,7 @@ exports.createData = (request, response) =>{
 //export de la methode updateData qui permet de mettre à jour une donnée en se basant sur son id
 exports.updateData = (request, response) => {
     //lecture du fichier avec readFile
-    fs.readFile(myData, (err, data)=>{
+    fs.readFile(myData, (err, data)=> {
         //condition si il y a une erreur lors de la lecture
         if(err) {
             //on renvoi l'erreur 500 avec le message
@@ -163,7 +163,7 @@ exports.updateData = (request, response) => {
                 //on remplace les données par celles de la requête
                 Object.assign(dataById, request.body);
                 //on réecrit les nouvelles données avec writeFile
-                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{
+                fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=> {
                     //si il y a une erreur
                     if(writeErr) {
                         //on renvoi l'erreur 500 + message erreur d'ecriture
@@ -212,7 +212,7 @@ exports.deleteDataById = (request, response) => {
                 //on réassigne la donnée existante sans la donnée éffacée avec la methode filter
                 existingData.action = existingData.action.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données avec writeFile
-                fs.writeFile(myData, JSON.stringify(existingData),(writeErr) => {
+                fs.writeFile(myData, JSON.stringify(existingData), (writeErr) => {
                     //si erreur de réécriture
                     if(writeErr) {
                         //renvoi de l'erreur 500 avec le message
