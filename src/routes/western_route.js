@@ -18,7 +18,7 @@ router.get("/western/:id", westernController.getDataById);
 //une route qui me permet de récupérer une data par son titre
 //GET "/western/search/:title"
 //ex: http://localhost:3200/western/search/je suis un titre
-router.get("/western/title/:titre", westernController.getDataByTitle);
+router.get("/western/titre/:titre", westernController.getDataByTitle);
 
 //Une route qui permet d'insérer de nouvelles données dans mes fichier film.json
 //POST "/western"

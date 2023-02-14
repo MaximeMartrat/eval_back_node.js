@@ -19,7 +19,7 @@
     { "id": 2, "titre": "Sacré Graal", "annee": "1975" },
     { "id": 3, "titre": "C'est arrivé près de chez vous", "annee": "1992" }
   ],
-  "scienceF": [
+  "sciencef": [
     { "id": 1, "titre": "Blade Runner", "annee": "1982" },
     { "id": 2, "titre": "Alien, le huitième passager", "annee": "1979" },
     { "id": 3, "titre": "Retour vers le futur", "annee": "1985" }

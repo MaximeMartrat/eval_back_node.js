@@ -116,12 +116,12 @@ exports.createData = (request, response) => {
             //si tableau vide
             if(existingData.thriller === 0) {
                 //tableau = requete (id =1=)
-                existingData.thriller.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.thriller.push({ "id": 1, "titre": request.body.titre, "annee": request.body.annee });
             //sinon
             } else {
                 let thisData = existingData.thriller [ existingData.thriller.length - 1 ]
                 //tableau = requete + (id = taille du tableau + 1)
-                existingData.thriller.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.thriller.push({ "id": thisData.id + 1, "titre": request.body.titre, "annee": request.body.annee });
             }
             //on réécrit les nouvelles données
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))

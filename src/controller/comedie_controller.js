@@ -118,11 +118,11 @@ exports.createData = (request, response) => {
             //si tableau vide
             if(existingData.comedie === 0) {
                 //tableau = requete  + (id = 1)
-                existingData.comedie.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.comedie.push({ "id": 1, "titre": request.body.titre, "annee": request.body.annee });
             //sinon
             } else {
                 let thisData = existingData.comedie[ existingData.comedie.length - 1 ];
-                existingData.comedie.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.comedie.push({ "id": thisData.id + 1, "titre": request.body.titre, "annee": request.body.annee });
             }
             //on réécrit les nouvelles données
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))

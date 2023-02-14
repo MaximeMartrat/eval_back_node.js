@@ -1,7 +1,7 @@
 //declaration de la constante pour l'export du module fs
 const fs = require('fs');
 const myData = "./src/model/film.json"
-//export de la methode getAllDataTab permettant d'afficher les données contenus dans le tableau sf du fichier "film.json" en json dans la requête
+//export de la methode getAllDataTab permettant d'afficher les données contenus dans le tableau sciencef du fichier "film.json" en json dans la requête
 exports.getAllDataTab = (request, response) => {
     //lecture du fichier
     //fs.readFile(chemin, (err, data))
@@ -16,7 +16,7 @@ exports.getAllDataTab = (request, response) => {
         //else
         } else {
             //status 200 + JSON.parse(data).tableau
-            response.status(200).json(JSON.parse(data).sf);
+            response.status(200).json(JSON.parse(data).sciencef);
         }
     })
 }
@@ -40,7 +40,7 @@ exports.getDataById = (request, response) => {
             const existingData = JSON.parse(data);
             //recherche dans le fichier si donnée.id existe
             //données.tableau.find
-            const dataById = existingData.sf.find((obj) => obj.id === parseInt(request.params.id));
+            const dataById = existingData.sciencef.find((obj) => obj.id === parseInt(request.params.id));
             //if donnée existe
             if (dataById) {
                 //status 200 + objet
@@ -76,7 +76,7 @@ exports.getDataByTitle = (request, response)=> {
             const existingData = JSON.parse(data);
             //recherche dans la donnée du titre correspondant à la requête et stockage du résultat dans une const
             //const databytitle = data.tableau.find
-            const dataByTitle = existingData.sf.find((obj)=> obj.titre.toLowerCase() === request.params.titre.toLowerCase())
+            const dataByTitle = existingData.sciencef.find((obj)=> obj.titre.toLowerCase() === request.params.titre.toLowerCase())
             //si data de la requete trouvé
             if(dataByTitle) {
                 //status 200 + donnée
@@ -93,7 +93,7 @@ exports.getDataByTitle = (request, response)=> {
     })
 }
 
-//export de la methode createData permettant d'intégrer de nouvelles données dans le tableau sf de mes fichiers "film.json"
+//export de la methode createData permettant d'intégrer de nouvelles données dans le tableau sciencef de mes fichiers "film.json"
 exports.createData = (request, response) => {
     //lecture du fichier film.json
     //fs.readFile (chemin, (err,data))
@@ -112,14 +112,14 @@ exports.createData = (request, response) => {
             const existingData = JSON.parse(data);
             //ajout de la donnée de la requête
             //si tableau vide
-            if(existingData.sf === 0) {
+            if(existingData.sciencef === 0) {
                 //tableau = requete (id =1)
-                existingData.sf.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.sciencef.push({ "id": 1, "titre": request.body.titre, "annee": request.body.annee });
             //sinon
             } else {
-                let thisData = existingData.sf[existingData.sf.length - 1 ]
+                let thisData = existingData.sciencef[existingData.sciencef.length - 1 ]
                 //tableau = requete (id = taille du tableau + 1)
-                existingData.sf.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.sciencef.push({ "id": thisData.id + 1, "titre": request.body.titre, "annee": request.body.annee });
             }
             //écriture de la donnée en string dans le tableau
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))
@@ -159,7 +159,7 @@ exports.updateData = (request, response)=> {
             const existingData = JSON.parse(data);
             //recherche dans le fichier de la donnée correspondante à l'id et je la stocke
             //const databyid = data.tableau.find
-            const dataById = existingData.sf.find((obj)=> obj.id === parseInt(request.params.id));
+            const dataById = existingData.sciencef.find((obj)=> obj.id === parseInt(request.params.id));
             //if databyId n'existe pas
             if(!dataById) {
                 //erreur 404 + message
@@ -213,7 +213,7 @@ exports.deleteDataById = (request, response) =>{
             const existingData = JSON.parse(data);
             //recherche dans la donnée de l'id correspondante à la requête et stockage dans une const
             //const databyid = data.tableau.find
-            const dataById = existingData.sf.find((obj)=> obj.id === parseInt(request.params.id));
+            const dataById = existingData.sciencef.find((obj)=> obj.id === parseInt(request.params.id));
             //si data de la requete non trouvé
             if(!dataById) {
                 //status 404 + message
@@ -225,7 +225,7 @@ exports.deleteDataById = (request, response) =>{
             } else {
                 //données existante = donnée de la requete
                 //data.tableau = data.tableau.filter
-                existingData.sf = existingData.sf.filter((obj)=> obj.id != parseInt(request.params.id));
+                existingData.sciencef = existingData.sciencef.filter((obj)=> obj.id != parseInt(request.params.id));
                 //on réécrit les nouvelles données
                 //fs.writeFile(chemin, JSON.stringify(donnée), (err))
                 fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{

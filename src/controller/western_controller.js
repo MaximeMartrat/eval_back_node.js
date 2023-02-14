@@ -107,12 +107,12 @@ exports.createData = (request, response) => {
             //si tableau vide
             if(existingData.western === 0) {
                 //tableau = requete id =1
-                existingData.western.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.western.push({ "id": 1, "titre": request.body.titre, "annee": request.body.annee });
             //sinon
             } else {
                 let thisData = existingData.western[ existingData.western.length -1 ] 
                 //tableau = requete id = taille du tableau + 1
-                existingData.western.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.western.push({ "id": thisData.id + 1, "titre": request.body.titre, "annee": request.body.annee });
             }
             //réécrit dans le fichier (ds.writeFile)
             fs.writeFile(myData, JSON.stringify(existingData), (writeErr)=>{

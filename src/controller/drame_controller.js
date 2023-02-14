@@ -114,12 +114,12 @@ exports.createData = (request, response) => {
             //si tableau vide
             if(existingData.drame === 0) {
                 //tableau = requete (id = 1)
-                existingData.drame.push({ "id": 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.drame.push({ "id": 1, "titre": request.body.titre, "annee": request.body.annee });
             //sinon
             } else {
                 let thisData = existingData.drame[existingData.drame.length - 1]
                 //tableau = requete (id = taille du tableau + 1)
-                existingData.drame.push({ "id": thisData.id + 1, "titre": request.body.titre, "année": request.body.année });
+                existingData.drame.push({ "id": thisData.id + 1, "titre": request.body.titre, "annee": request.body.annee });
             }
             //écriture de la donnée en string dans le tableau
             //fs.writeFile(chemin, JSON.stringify(donnée), (err))

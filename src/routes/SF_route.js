@@ -18,7 +18,7 @@ router.get("/sf/:id", sfController.getDataById);
 //une route qui me permet de récupérer une data par son titre
 //GET "/SF/search/:titre"
 //ex: http://localhost:3200/SF/title/je suis un titre
-router.get("/sf/title/:titre", sfController.getDataByTitle);
+router.get("/sf/titre/:titre", sfController.getDataByTitle);
 
 //une route qui me permet d'insérer de la donnée dans mes fichier film.json
 //POST "/SF"

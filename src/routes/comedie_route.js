@@ -18,7 +18,7 @@ router.get("/comedie/:id", comedieController.getDataById);
 //une route qui me permet de récupérer une data par son titre
 //GET "/comedie/search/:title"
 //ex: http://localhost:3200/comedie/title/je suis un titre
-router.get("/comedie/title/:titre", comedieController.getDataByTitle);
+router.get("/comedie/titre/:titre", comedieController.getDataByTitle);
 
 //une route qui me permet d'insérer de la donnée dans mes fichier film.json
 //POST "/comedie"
